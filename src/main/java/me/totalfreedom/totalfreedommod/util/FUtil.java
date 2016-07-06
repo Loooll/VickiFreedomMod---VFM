@@ -38,7 +38,7 @@ public class FUtil
     // See https://github.com/TotalFreedom/License - None of the listed names may be removed.
     //PLEASE DO NOT EDIT THIS LIST OR YOU MAY BE SUED AND OR PERMBANNED ON TF AND VF.
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "Prozza", "Wild1145", "WickedGamingUK");
-    public static final List<String> VFMDEVELOPERS = Arrays.asList("Loooll","Mafrans");
+    public static final List<String> VFMDEVELOPERS = Arrays.asList("Loooll","Mafrans","DUFC_Liam");
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<>();
     public static final List<ChatColor> CHAT_COLOR_POOL = Arrays.asList(
