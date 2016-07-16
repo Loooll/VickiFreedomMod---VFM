@@ -19,7 +19,6 @@ public class Command_nickclean extends FreedomCommand
     {
         ChatColor.MAGIC,
         ChatColor.STRIKETHROUGH,
-        ChatColor.ITALIC,
         ChatColor.UNDERLINE,
         ChatColor.BLACK
     };

@@ -19,7 +19,7 @@
         <maven.build.timestamp.format>dd/MM/yyyy hh:mm aa</maven.build.timestamp.format>
     </properties>
 
-    <name>VickiFreedomMod</name>
+    <name>VickiFreedom-mc1.10</name>
     <description>Server modification for the TotalFreedom server</description>
     <url>https://github.com/TotalFreedom/TotalFreedomMod</url>
 
@@ -60,9 +60,9 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.10</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/Spigot-1.9.jar</systemPath>
+            <systemPath>${project.basedir}/lib/Spigot-1.10.jar</systemPath>
         </dependency>
 
         <dependency>

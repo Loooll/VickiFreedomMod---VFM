@@ -23,40 +23,35 @@ public class Command_admintools extends FreedomCommand
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         PlayerInventory inv = sender_p.getInventory();
-        ItemStack logstick = new ItemStack(Material.STICK, 1);
-        ItemStack block = new ItemStack(Material.EMERALD_BLOCK, 1);
-        ItemStack wand = new ItemStack(Material.WOOD_AXE, 1);
-        ItemStack compass = new ItemStack(Material.COMPASS, 1);
-        for (Enchantment ench : Enchantment.values())
-            {
-                logstick.addUnsafeEnchantment(ench, 127);
-            }
-        for (Enchantment ench : Enchantment.values())
-            {
-                block.addUnsafeEnchantment(ench, 127);
-            }
-            for (Enchantment ench : Enchantment.values())
-            {
-                wand.addUnsafeEnchantment(ench, 127);
-            }
-            
-            ItemMeta logstickmeta = logstick.getItemMeta();
-        logstickmeta.setDisplayName(ChatColor.YELLOW + "Logstick");     
-            
-            ItemMeta blockmeta = block.getItemMeta();
-            blockmeta.setDisplayName(ChatColor.DARK_RED + "Emerald" + ChatColor.RED + "Block");
-            
-            ItemMeta wandmeta = wand.getItemMeta();
-            wandmeta.setDisplayName(ChatColor.GREEN + "World" + ChatColor.DARK_GREEN + "Edit" + ChatColor.RED + " Wand");
-            
-            ItemMeta compassmeta = compass.getItemMeta();
-            compassmeta.setDisplayName(ChatColor.DARK_RED + "Compass");
-            
-            
-                inv.addItem(logstick);
-                inv.addItem(block);
-                inv.addItem(wand);
-                inv.addItem(compass);
+         
+        final ItemStack heldItem = new ItemStack(Material.WOOD_AXE);
+        final ItemMeta heldItemMeta = heldItem.getItemMeta();
+        heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.GOLD).append("The ").append(ChatColor.YELLOW).append("Wand").toString());
+        heldItemMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+        heldItem.setItemMeta(heldItemMeta);
+
+        final ItemStack compassItem = new ItemStack(Material.COMPASS);
+        final ItemMeta compassMeta = heldItem.getItemMeta();
+        compassMeta.setDisplayName((new StringBuilder()).append(ChatColor.DARK_RED).append("The ").append(ChatColor.RED).append("Compass").toString());
+        compassMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+        compassItem.setItemMeta(compassMeta);
+    
+        final ItemStack stickItem = new ItemStack(Material.STICK);
+        final ItemMeta stickItemMeta = heldItem.getItemMeta();
+        stickItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.YELLOW).append("Log ").append(ChatColor.YELLOW).append("Stick").toString());
+        stickItemMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+        stickItem.setItemMeta(stickItemMeta);
+        
+        final ItemStack blockItem = new ItemStack(Material.EMERALD_BLOCK);
+        final ItemMeta blockItemMeta = heldItem.getItemMeta();      
+        blockItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.DARK_GREEN).append("Emerald ").append(ChatColor.GREEN).append("Block").toString());
+        blockItemMeta.addEnchant(Enchantment.DURABILITY, 127, true);
+        blockItem.setItemMeta(blockItemMeta);
+    
+              inv.addItem(stickItem);
+              inv.addItem(heldItem);
+              inv.addItem(compassItem);
+              inv.addItem(blockItem);
               
              sender_p.sendMessage(ChatColor.RED + "Administrating tools has been placed into your inventory");
         return true;

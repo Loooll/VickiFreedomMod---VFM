@@ -99,6 +99,8 @@ public class ChatManager extends FreedomService
         // Set format
         event.setFormat(format);
     }
+    
+    
 
     public void adminChat(CommandSender sender, String message)
     {

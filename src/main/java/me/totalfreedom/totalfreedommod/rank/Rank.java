@@ -13,7 +13,13 @@ public enum Rank implements Displayable
     TELNET_ADMIN("a", "Telnet Admin", Type.ADMIN, "STA", ChatColor.DARK_GREEN),
     SENIOR_ADMIN("a", "Senior Admin", Type.ADMIN, "SrA", ChatColor.GOLD),
     TELNET_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
-    SENIOR_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE);
+    SENIOR_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
+    EXECUTIVE("a", "Executive", Type.ADMIN, "Executive", ChatColor.GOLD),
+    SYSADMIN("a", "System-Admin", Type.ADMIN, "System-Admin", ChatColor.GREEN),
+    OWNER("the", "Owner", Type.ADMIN, "Owner", ChatColor.BLUE),
+    EXECUTIVE_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
+    SYSADMIN_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
+    OWNER_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE);
     @Getter
     private final Type type;
     @Getter
@@ -93,6 +99,15 @@ public enum Rank implements Displayable
             case SENIOR_ADMIN:
             case SENIOR_CONSOLE:
                 return SENIOR_CONSOLE;
+            case EXECUTIVE:
+            case EXECUTIVE_CONSOLE:
+                return EXECUTIVE_CONSOLE;
+            case SYSADMIN:
+            case SYSADMIN_CONSOLE:
+                return SYSADMIN_CONSOLE;
+            case OWNER:
+            case OWNER_CONSOLE:
+                return OWNER_CONSOLE;
             default:
                 return null;
         }
@@ -108,6 +123,15 @@ public enum Rank implements Displayable
             case SENIOR_ADMIN:
             case SENIOR_CONSOLE:
                 return SENIOR_ADMIN;
+            case EXECUTIVE:
+            case EXECUTIVE_CONSOLE:
+                return EXECUTIVE;
+            case SYSADMIN:
+            case SYSADMIN_CONSOLE:
+                return SYSADMIN;
+            case OWNER:
+            case OWNER_CONSOLE:
+                return OWNER;
             default:
                 return null;
         }
@@ -126,6 +150,12 @@ public enum Rank implements Displayable
         return Rank.NON_OP;
     }
 
+    public boolean contains(String name)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     public static enum Type
     {
 

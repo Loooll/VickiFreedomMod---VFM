@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = Rank.OP, source = SourceType.BOTH)
-@CommandParameters(description = "Manage admins.", usage = "/<command> <list | clean | reload | | setrank <username> <rank> | <add | remove | info> <username>>")
+@CommandParameters(description = "Manage admins.", usage = "/<command> <list | clean | reload | | setrank <username> <rank> || sysrank <username> <executive/sysadmin>| <add | remove | info> <username>>")
 public class Command_saconfig extends FreedomCommand
 {
 
@@ -66,12 +66,31 @@ public class Command_saconfig extends FreedomCommand
                 {
                     return false;
                 }
+                
 
                 Rank rank = Rank.findRank(args[2]);
                 if (rank == null)
                 {
                     msg("Unknown rank: " + rank);
                     return true;
+                }
+                
+                if (rank == Rank.SYSADMIN)
+                {
+                    msg("Unable to set to rank: " + rank);
+                    return false;
+                }
+                
+                if (rank == Rank.EXECUTIVE)
+                {
+                    msg("Unable to set to rank: " + rank);
+                    return false;
+                }
+                
+                if (rank == Rank.OWNER)
+                {
+                    msg("Unable to set to rank: " + rank);
+                    return false;
                 }
 
                 if (!rank.isAtLeast(Rank.SUPER_ADMIN))
@@ -88,6 +107,54 @@ public class Command_saconfig extends FreedomCommand
                 }
 
                 FUtil.adminAction(sender.getName(), "Setting " + admin.getName() + "'s rank to " + rank.getName(), true);
+
+                admin.setRank(rank);
+                plugin.al.save();
+
+                msg("Set " + admin.getName() + "'s rank to " + rank.getName());
+                return true;
+            }
+            
+            case "sysrank":
+            {
+                checkConsole();
+                checkNotHostConsole();
+                checkRank(Rank.SYSADMIN_CONSOLE);
+
+                if (args.length < 3)
+                {
+                    return false;
+                }
+                
+
+                Rank rank = Rank.findRank(args[2]);
+                if (rank == null)
+                {
+                    msg("Unknown rank: " + rank);
+                    return true;
+                }
+                
+                if (rank == Rank.OWNER)
+                {
+                    msg("Unable to set to rank: " + rank);
+                    return false;
+                }
+                
+                if (!rank.isAtLeast(Rank.SENIOR_ADMIN))
+                {
+                    msg("Rank must be EXECUTIVE or higher.", ChatColor.RED);
+                    return true;
+                }
+
+                Admin admin = plugin.al.getEntryByName(args[1]);
+                if (admin == null)
+                {
+                    msg("Unknown admin: " + args[1]);
+                    return true;
+                }
+
+                FUtil.adminAction(sender.getName(), "Setting " + admin.getName() + "'s rank to " + rank.getName(), true);
+
                 admin.setRank(rank);
                 plugin.al.save();
 

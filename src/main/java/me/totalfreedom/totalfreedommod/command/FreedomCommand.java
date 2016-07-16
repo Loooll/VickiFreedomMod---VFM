@@ -22,6 +22,7 @@ public abstract class FreedomCommand extends AbstractCommandBase<TotalFreedomMod
     public static final String YOU_ARE_NOT_OP = ChatColor.YELLOW + "You are no longer op!";
     public static final String NOT_FROM_CONSOLE = "This command may not be used from the console.";
     public static final String PLAYER_NOT_FOUND = ChatColor.GRAY + "Player not found!";
+    public static final String NO_PERMISSION = ChatColor.RED + "No permission to use this command";
     //
     @Getter
     private final CommandParameters params;

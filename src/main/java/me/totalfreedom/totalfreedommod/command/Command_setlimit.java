@@ -14,10 +14,10 @@ public class Command_setlimit extends FreedomCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        FUtil.adminAction(sender.getName(), "Setting everyone's Worldedit block modification limit to 2500.", true);
+        FUtil.adminAction(sender.getName(), "Setting everyone's Worldedit block modification limit to 5000.", true);
         for (final Player player : server.getOnlinePlayers())
         {
-            plugin.web.setLimit(player, 2500);
+            plugin.web.setLimit(player, 5000);
         }
         return true;
     }

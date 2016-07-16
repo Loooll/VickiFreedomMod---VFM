@@ -20,6 +20,7 @@ public enum ConfigEntry
     ALLOW_WATER_PLACE(Boolean.class, "allow.water_place"),
     ALLOW_SIGN_PLACE(Boolean.class, "allow.sign_place"),
     ALLOW_SKULL_PLACE(Boolean.class, "allow.skull_place"),
+    ALLOW_STRUCTURE_PLACE(Boolean.class, "allow.structure_place"),
     //
     MOB_LIMITER_ENABLED(Boolean.class, "moblimiter.enabled"),
     MOB_LIMITER_MAX(Integer.class, "moblimiter.max"),
@@ -37,14 +38,14 @@ public enum ConfigEntry
     SERVER_ADDRESS(String.class, "server.address"),
     SERVER_MOTD(String.class, "server.motd"),
     SERVER_OWNERS(List.class, "server.owners"),
-    SERVER_EXECUTIVES(List.class, "server.executives"),
     SERVER_SYSADMINS(List.class, "server.sysadmins"),
+    SERVER_EXECUTIVES(List.class, "server.executives"),
     SERVER_COOWNERS(List.class, "server.coowners"),
     SERVER_BAN_URL(String.class, "server.ban_url"),
     SERVER_PERMBAN_URL(String.class, "server.permban_url"),
     //
     ADMINLIST_CLEAN_THESHOLD_HOURS(Integer.class, "adminlist.clean_threshold_hours"),
-    ADMINLIST_CONSOLE_IS_SENIOR(Boolean.class, "adminlist.console_is_senior"),
+    ADMINLIST_CONSOLE_IS_OWNER(String.class, "adminlist.console_is_owner"),
     //
     DISABLE_NIGHT(Boolean.class, "disable.night"),
     DISABLE_WEATHER(Boolean.class, "disable.weather"),

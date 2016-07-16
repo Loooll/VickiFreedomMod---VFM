@@ -1,4 +1,3 @@
-
 package me.totalfreedom.totalfreedommod.blocking;
 
 import me.totalfreedom.totalfreedommod.FreedomService;
@@ -75,24 +74,6 @@ public class BlockBlocker extends FreedomService
                 }
                 break;
             }
-            case SKULL:
-            case SKULL_ITEM:
-            {
-                if (ConfigEntry.ALLOW_SKULL_PLACE.getBoolean())
-                {
-                    FLog.info(String.format("%s placed sign @ %s", player.getName(), FUtil.formatLocation(event.getBlock().getLocation())));
-
-                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
-                }
-                else
-                {
-                    player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.COOKIE, 1));
-                    player.sendMessage(ChatColor.GRAY + "Skull placement is currently disabled due to security reasons.");
-
-                    event.setCancelled(true);
-                }
-                break;
-            }
             case FIRE:
             {
                 if (ConfigEntry.ALLOW_FIRE_PLACE.getBoolean())
@@ -139,14 +120,48 @@ public class BlockBlocker extends FreedomService
                 else
                 {
                     player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.COOKIE, 1));
-                    player.sendMessage(ChatColor.GRAY + "Sign placement is currently disabled due to security reasons.");
+                    player.sendMessage(ChatColor.GRAY + "Sign placement is disabled due to security reasons.");
 
                     event.setCancelled(true);
                 }
                 break;
-          
-            
+            }
+            case SKULL:
+            case SKULL_ITEM:
+            {
+                if (ConfigEntry.ALLOW_SKULL_PLACE.getBoolean())
+                {
+                    FLog.info(String.format("%s placed skull @ %s", player.getName(), FUtil.formatLocation(event.getBlock().getLocation())));
+
+                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
+                }
+                else
+                {
+                    player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.COOKIE, 1));
+                    player.sendMessage(ChatColor.GRAY + "Skull placement is currently disabled.");
+
+                    event.setCancelled(true);
+                }
+                break;
+            }
+            case STRUCTURE_BLOCK:
+            {
+                if (ConfigEntry.ALLOW_STRUCTURE_PLACE.getBoolean())
+                {
+                    FLog.info(String.format("%s placed structure block @ %s", player.getName(), FUtil.formatLocation(event.getBlock().getLocation())));
+
+                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
+                }
+                else
+                {
+                    player.getInventory().setItem(player.getInventory().getHeldItemSlot(), new ItemStack(Material.COOKIE, 1));
+                    player.sendMessage(ChatColor.GRAY + "Structure block placement is currently disabled.");
+
+                    event.setCancelled(true);
+                }
+                break;
             }
         }
     }
+
 }

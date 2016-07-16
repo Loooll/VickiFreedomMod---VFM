@@ -40,6 +40,21 @@ public class Command_wildcard extends FreedomCommand
             msg("WOA, WTF are you trying to do???", ChatColor.RED);
             return true;
         }
+        if (args[0].equals("silentban"))
+        {
+            msg("Nope! Not banning players without others knowing :)", ChatColor.RED);
+            return true;
+        }
+        if (args[0].equals("sys"))
+        {
+            msg("Whoa!Are you some kind of nutjob?", ChatColor.RED);
+            return true;
+        }
+        if (args[0].equals("rkick"))
+        {
+            msg("Wtf are you doing, kick everyone? BURN IN HELL!", ChatColor.RED);
+            return true;
+        }
 
         String baseCommand = StringUtils.join(args, " ");
 

@@ -58,6 +58,7 @@ public class FPlayer
     private BukkitTask lockupScheduleTask = null;
     private String lastMessage = "";
     private boolean inAdminchat = false;
+    private boolean inSeniorChat = false;
     private boolean allCommandsBlocked = false;
     @Getter
     @Setter
@@ -66,6 +67,7 @@ public class FPlayer
     private boolean cmdspyEnabled = false;
     private String tag = null;
     private int warningCount = 0;
+    private boolean inSeniorchat;
 
     public FPlayer(TotalFreedomMod plugin, Player player)
     {
@@ -321,11 +323,22 @@ public class FPlayer
     {
         this.inAdminchat = inAdminchat;
     }
+    
+    public void setSeniorChat(boolean inSeniorchat)
+    {
+        this.inSeniorchat = inSeniorchat;
+    }
 
     public boolean inAdminChat()
     {
         return this.inAdminchat;
     }
+    
+    public boolean inSeniorChat()
+    {
+        return this.inSeniorchat;
+    }
+
 
     public boolean allCommandsBlocked()
     {

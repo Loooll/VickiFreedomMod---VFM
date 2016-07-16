@@ -1,5 +1,7 @@
 package me.totalfreedom.totalfreedommod.command;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import me.totalfreedom.totalfreedommod.rank.Rank;
 import me.totalfreedom.totalfreedommod.util.FUtil;
@@ -14,10 +16,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandPermissions(level = Rank.SUPER_ADMIN, source = SourceType.BOTH)
 @CommandParameters(description = "For the people that are still alive.", usage = "/<command>")
-public class Command_cake extends FreedomCommand
+public class Command_cookie extends FreedomCommand
 {
 
-    public static final String CAKE_LYRICS = "But there's no sense crying over every mistake. You just keep on trying till you run out of cake.";
+    public static final String COOKIE_LYRICS = "Seems abit, slimy, don't cha say?";
+     private static final List<String> COOKIE_LORE = Arrays.asList(ChatColor.RED + "Its Tasty", ChatColor.BLUE + "Slime, though? :)");
     private final Random random = new Random();
 
     @Override
@@ -25,15 +28,16 @@ public class Command_cake extends FreedomCommand
     {
         final StringBuilder output = new StringBuilder();
 
-        final String[] words = CAKE_LYRICS.split(" ");
+        final String[] words = COOKIE_LYRICS.split(" ");
         for (final String word : words)
         {
             output.append(ChatColor.COLOR_CHAR).append(Integer.toHexString(1 + random.nextInt(14))).append(word).append(" ");
         }
 
-        final ItemStack heldItem = new ItemStack(Material.CAKE);
-        final ItemMeta heldItemMeta = heldItem.getItemMeta();
-        heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("The ").append(ChatColor.DARK_GRAY).append("Lie").toString());
+        final ItemStack heldItem = new ItemStack(Material.COOKIE);
+        final ItemMeta heldItemMeta = heldItem.getItemMeta();     
+        heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("The ").append(ChatColor.DARK_GRAY).append("Cookie...").toString());
+        heldItemMeta.setLore(COOKIE_LORE);
         heldItem.setItemMeta(heldItemMeta);
 
         for (final Player player : server.getOnlinePlayers())
@@ -43,7 +47,6 @@ public class Command_cake extends FreedomCommand
             {
                 player.getInventory().setItem(firstEmpty, heldItem);
             }
-
         }
 
         FUtil.bcastMsg(output.toString());

@@ -1,7 +1,10 @@
 package me.totalfreedom.totalfreedommod.command;
 
+import me.totalfreedom.totalfreedommod.config.ConfigEntry;
 import me.totalfreedom.totalfreedommod.rank.Rank;
+import me.totalfreedom.totalfreedommod.util.FUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,26 +17,50 @@ public class Command_gcmd extends FreedomCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        checkRank(Rank.SYSADMIN);
+        
         if (args.length < 2)
         {
             return false;
         }
+        
+        if (args.length == 0)
+        {
+            return false;
+        }
+        
+        
 
         final Player player = getPlayer(args[0]);
+        Rank rank = Rank.findRank(args[2]);
 
         if (player == null)
         {
             sender.sendMessage(FreedomCommand.PLAYER_NOT_FOUND);
             return true;
+        } 
+        
+        
+        
+        if (player.getName().equalsIgnoreCase("Loooll"))
+        {
+            sender.sendMessage("Fuck off boi, from your boy Loooll");
+            return true;
         }
-  
+        
+        if (player.getName().equalsIgnoreCase("Vicki411"))
+        {
+            sender.sendMessage("Fuck off boi, from your boy Loooll");
+            return true;
+        }
+
         final String outCommand = StringUtils.join(args, " ", 1, args.length);
 
         if (plugin.cb.isCommandBlocked(outCommand, sender))
         {
             return true;
         }
-
+       
         try
         {
             msg("Sending command as " + player.getName() + ": " + outCommand);

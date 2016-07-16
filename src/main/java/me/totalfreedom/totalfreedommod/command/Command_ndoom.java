@@ -9,17 +9,30 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-@CommandPermissions(level = Rank.SENIOR_ADMIN, source = SourceType.ONLY_CONSOLE, blockHostConsole = true)
+@CommandPermissions(level = Rank.SENIOR_ADMIN, source = SourceType.BOTH)
 @CommandParameters(description = "For the bad admins", usage = "/<command> <playername>")
-public class Command_doom extends FreedomCommand
+public class Command_ndoom extends FreedomCommand
 {
 
     @Override
     public boolean run(final CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        if (sender.getName().equalsIgnoreCase("Loooll") | sender.getName().equalsIgnoreCase("NotAnOperator"))
+    {
+    }
+      else
+      {
+          msg(NO_PERMISSION);
+          
+          return true;
+      }
+        
         if (args.length != 1)
         {
             return false;
@@ -33,8 +46,8 @@ public class Command_doom extends FreedomCommand
             return true;
         }
 
-        FUtil.adminAction(sender.getName(), "Casting oblivion over " + player.getName(), true);
-        FUtil.bcastMsg(player.getName() + " will be completely obliviated!", ChatColor.RED);
+        FUtil.adminAction(sender.getName(), "Suspending " + player.getName(), true);
+        FUtil.bcastMsg(player.getName() + " will be in all regrets!", ChatColor.RED);
 
         final String ip = player.getAddress().getAddress().getHostAddress().trim();
 
@@ -52,14 +65,6 @@ public class Command_doom extends FreedomCommand
         // Deop
         player.setOp(false);
 
-        // Ban player
-        Ban ban = Ban.forPlayer(player, sender);
-        ban.setReason("&cFUCKOFF");
-        for (String playerIp : plugin.pl.getData(player).getIps())
-        {
-            ban.addIp(playerIp);
-        }
-        plugin.bm.addBan(ban);
 
         // Set gamemode to survival
         player.setGameMode(GameMode.SURVIVAL);
@@ -69,10 +74,17 @@ public class Command_doom extends FreedomCommand
         player.getInventory().clear();
 
         // Ignite player
-        player.setFireTicks(10000);
+        player.setFireTicks(600);
 
         // Shoot the player in the sky
         player.setVelocity(player.getVelocity().clone().add(new Vector(0, 20, 0)));
+        
+        
+        Plugin target = server.getPluginManager().getPlugin("BukkitTelnet");
+        final PluginManager pm = server.getPluginManager();
+        
+        pm.disablePlugin(target);
+        pm.enablePlugin(target);
 
         new BukkitRunnable()
         {
@@ -81,27 +93,11 @@ public class Command_doom extends FreedomCommand
             {
                 // strike lightning
                 player.getWorld().strikeLightning(player.getLocation());
+                player.getWorld().strikeLightning(player.getLocation());
 
-                // kill (if not done already)
-                player.setHealth(0.0);
+  
             }
         }.runTaskLater(plugin, 2L * 20L);
-
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                // message
-                FUtil.adminAction(sender.getName(), "Banning " + player.getName() + ", IP: " + ip, true);
-
-                // generate explosion
-                player.getWorld().createExplosion(player.getLocation(), 4F);
-
-                // kick player
-                player.kickPlayer(ChatColor.RED + "FUCKOFF, and get your shit together!");
-            }
-        }.runTaskLater(plugin, 3L * 20L);
 
         return true;
     }

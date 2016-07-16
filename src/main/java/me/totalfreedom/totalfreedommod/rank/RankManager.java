@@ -54,6 +54,10 @@ public class RankManager extends FreedomService
         {
             return Title.DEVELOPER;
         }
+        if (FUtil.VFMDEVELOPERS.contains(player.getName()))
+        {
+            return Title.VFMDEVELOPER;
+        }
 
         final Rank rank = getRank(player);
 
@@ -66,21 +70,16 @@ public class RankManager extends FreedomService
         // If the player's an owner, display that
         if (ConfigEntry.SERVER_OWNERS.getList().contains(player.getName()))
         {
-            return Title.OWNER;
+            return Rank.OWNER;
         }
         if (ConfigEntry.SERVER_SYSADMINS.getList().contains(player.getName()))
         {
-            return Title.SYSADMIN;
+            return Rank.SYSADMIN;
         }
         if (ConfigEntry.SERVER_EXECUTIVES.getList().contains(player.getName()))
         {
-            return Title.EXECUTIVE;
+            return Rank.EXECUTIVE;
         }
-        if (ConfigEntry.SERVER_COOWNERS.getList().contains(player.getName()))
-        {
-            return Title.COOWNER;
-        }
-        
 
         return rank;
     }
@@ -95,7 +94,7 @@ public class RankManager extends FreedomService
         // CONSOLE?
         if (sender.getName().equals("CONSOLE"))
         {
-            return ConfigEntry.ADMINLIST_CONSOLE_IS_SENIOR.getBoolean() ? Rank.SENIOR_CONSOLE : Rank.TELNET_CONSOLE;
+            return ConfigEntry.ADMINLIST_CONSOLE_IS_OWNER.getBoolean() ? Rank.OWNER_CONSOLE : Rank.TELNET_CONSOLE;
         }
 
         // Console admin, get by name
@@ -167,6 +166,7 @@ public class RankManager extends FreedomService
             player.setGameMode(GameMode.SURVIVAL);
             plugin.pl.getPlayer(player).getFreezeData().setFrozen(true);
             player.sendMessage(ChatColor.RED + "You are marked as an impostor, please verify yourself!");
+            player.sendMessage(ChatColor.DARK_RED + "If you are real and don't want to verify, you may be suspended");
             return;
         }
 

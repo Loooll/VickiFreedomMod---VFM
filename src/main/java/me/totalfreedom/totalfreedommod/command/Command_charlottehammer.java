@@ -18,12 +18,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = Rank.SUPER_ADMIN, source = SourceType.BOTH, blockHostConsole = true)
 @CommandParameters(description="Banning players", usage="/<command> <playername>")
-public class Command_lban
+public class Command_charlottehammer
   extends FreedomCommand
 {
   public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
   {
-    if (sender.getName().equalsIgnoreCase("Loooll"))
+    if (sender.getName().equalsIgnoreCase("Charlotte474747"))
     {
     }
       else
@@ -41,7 +41,8 @@ public class Command_lban
       sender.sendMessage(ChatColor.RED + "Player not found");
       return true;
     }
-    FUtil.adminAction(sender.getName(), " is banning a noob, aka " + player.getName(), true);
+    
+    FUtil.adminAction(sender.getName(), "Is hammering down " + player.getName(), true);
     
     
     
@@ -49,21 +50,27 @@ public class Command_lban
     
     
     
-    
-    
-    
-    
-    
-    FUtil.bcastMsg(sender.getName() + " is going to punish" + player.getName() + " for being a noob", ChatColor.RED);
-    
+    new BukkitRunnable()
+    {
+      public void run()
+      {
+           FUtil.bcastMsg(player.getName() + " will be having a bad time", ChatColor.GOLD);
+      }
+    } .runTaskLater(this.plugin, 30L);
+            
     final String ip = player.getAddress().getAddress().getHostAddress().trim();
     
+    new BukkitRunnable()
+    {
+    public void run()
+    {
     player.setWhitelisted(false);
     player.setOp(false);
     player.setGameMode(GameMode.SURVIVAL);
     player.closeInventory();
     player.getInventory().clear();
-
+    }
+    } .runTaskLater(this.plugin, 40L);
     
     new BukkitRunnable()
     {
@@ -74,7 +81,7 @@ public class Command_lban
     }
     
 
-      .runTaskLater(this.plugin, 40L);
+      .runTaskLater(this.plugin, 50L);
     
         
         
@@ -87,39 +94,56 @@ public class Command_lban
         Admin admin = getAdmin(player);
         if (admin != null)
         {
-            FUtil.adminAction(sender.getName(), "Removing " + player.getName() + " from the superadmin list", true);
+            FUtil.adminAction(sender.getName(), "Gaster blasted " + player.getName() + " off the superadmin list", true);
             plugin.al.removeAdmin(admin);
         }
           player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          player.getWorld().strikeLightning(player.getLocation());
+          
+          
       }
-    }
-    
-      .runTaskLater(this.plugin, 40L);
+    } .runTaskLater(this.plugin, 60L);
     
 
 
-    FUtil.adminAction(sender.getName(), ":" + " Time to put you in the void, :)", true);
+   
     
     new BukkitRunnable()
         {
             @Override
             public void run()
             {
+                 FUtil.adminAction(sender.getName(), " Sending " + player.getName() + " into the permbans.yml file ", true);
+                
                 // message
                 FUtil.adminAction(sender.getName(), "Banning " + player.getName() + ", IP: " + ip, true);
-                // kick player
-                player.kickPlayer(ChatColor.RED + "FUCKOFF, and get your shit together!");
-                // Ban player
-        Ban ban = Ban.forPlayer(player, sender);
-        ban.setReason("&cFUCKOFF");
-        for (String playerIp : plugin.pl.getData(player).getIps())
-        {
-            ban.addIp(playerIp);
-        }
-        plugin.bm.addBan(ban);
-            }
-        }.runTaskLater(plugin, 3L * 20L);
 
+                // kick player
+                player.kickPlayer(ChatColor.RED + "Suspended by the long arms of Charlotte474747!");
+                
+                Ban ban = Ban.forPlayer(player, sender);
+                ban.setReason("&cYou've been suspended from the server.");
+                for (String playerIp : plugin.pl.getData(player).getIps())
+                {
+                 ban.addIp(playerIp);
+                 }
+                 plugin.bm.addBan(ban);
+                 }      
+        }.runTaskLater(plugin, 4L * 20L);
+    
+    
     return true;
   }
 }

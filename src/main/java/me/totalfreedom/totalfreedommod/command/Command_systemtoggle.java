@@ -8,96 +8,45 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(level = Rank.SUPER_ADMIN, source = SourceType.BOTH)
-@CommandParameters(description = "Toggles TotalFreedomMod settings", usage = "/<command> [option] [value] [value]")
-public class Command_toggle extends FreedomCommand
+@CommandPermissions(level = Rank.SYSADMIN, source = SourceType.BOTH)
+@CommandParameters(description = "Toggles TotalFreedomMod settings", usage = "/<command> [option] [value] [value]", aliases = "stog")
+public class Command_systemtoggle extends FreedomCommand
 {
 
     @Override
     public boolean run(CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+    
         if (args.length == 0)
         {
             msg("Available toggles: ");
-            msg("- waterplace");
-            msg("- fireplace");
-            msg("- lavaplace");
-            msg("- fluidspread");
-            msg("- lavadmg");
-            msg("- firespread");
-            msg("- prelog");
-            msg("- lockdown");
-            msg("- petprotect");
-            msg("- entitywipe");
+            msg("- structureplace");
+            msg("- signplace");
+            msg("- skullplace");
             msg("- nonuke [range] [count]");
             msg("- explosives [radius]");
             return false;
         }
 
-        if (args[0].equals("waterplace"))
+                    
+        if (args[0].equals("structureplace"))
         {
-            toggle("Water placement is", ConfigEntry.ALLOW_WATER_PLACE);
+            toggle("Structure placement is", ConfigEntry.ALLOW_STRUCTURE_PLACE);
             return true;
         }
-
-        if (args[0].equals("fireplace"))
+        
+        if (args[0].equals("signplace"))
         {
-            toggle("Fire placement is", ConfigEntry.ALLOW_FIRE_PLACE);
+            toggle("Sign placement is", ConfigEntry.ALLOW_SIGN_PLACE);
             return true;
         }
-
-        if (args[0].equals("lavaplace"))
+        
+        if (args[0].equals("skullplace"))
         {
-            toggle("Lava placement is", ConfigEntry.ALLOW_LAVA_PLACE);
+            toggle("Skull placement is", ConfigEntry.ALLOW_SKULL_PLACE);
             return true;
         }
-
-        if (args[0].equals("fluidspread"))
-        {
-            toggle("Fluid spread is", ConfigEntry.ALLOW_FLUID_SPREAD);
-            return true;
-        }
-
-        if (args[0].equals("lavadmg"))
-        {
-            toggle("Lava damage is", ConfigEntry.ALLOW_LAVA_DAMAGE);
-            return true;
-        }
-
-        if (args[0].equals("firespread"))
-        {
-            toggle("Fire spread is", ConfigEntry.ALLOW_FIRE_SPREAD);
-            plugin.gr.setGameRule(GameRule.DO_FIRE_TICK, ConfigEntry.ALLOW_FIRE_SPREAD.getBoolean());
-            return true;
-        }
-
-        if (args[0].equals("prelog"))
-        {
-            toggle("Command prelogging is", ConfigEntry.ENABLE_PREPROCESS_LOG);
-            return true;
-        }
-
-        if (args[0].equals("lockdown"))
-        {
-            boolean active = !plugin.lp.isLockdownEnabled();
-            plugin.lp.setLockdownEnabled(active);
-
-            FUtil.adminAction(sender.getName(), (active ? "A" : "De-a") + "ctivating server lockdown", true);
-            return true;
-        }
-
-        if (args[0].equals("petprotect"))
-        {
-            toggle("Tamed pet protection is", ConfigEntry.ENABLE_PET_PROTECT);
-            return true;
-        }
-
-        if (args[0].equals("entitywipe"))
-        {
-            toggle("Automatic entity wiping is", ConfigEntry.AUTO_ENTITY_WIPE);
-            return true;
-        }
-
+        
         if (args[0].equals("nonuke"))
         {
             if (args.length >= 2)
@@ -158,8 +107,11 @@ public class Command_toggle extends FreedomCommand
 
         return false;
     }
-
-    private void toggle(String name, ConfigEntry entry)
+        
+        
+        
+        
+        private void toggle(String name, ConfigEntry entry)
     {
         msg(name + " now " + (entry.setBoolean(!entry.getBoolean()) ? "enabled." : "disabled."));
     }
