@@ -2,6 +2,7 @@ package me.totalfreedom.totalfreedommod.command;
 
 import java.util.Collection;
 import java.util.List;
+import me.totalfreedom.totalfreedommod.TotalFreedomMod;
 import me.totalfreedom.totalfreedommod.admin.Admin;
 import me.totalfreedom.totalfreedommod.config.ConfigEntry;
 import me.totalfreedom.totalfreedommod.config.MainConfig;
@@ -85,6 +86,18 @@ public class Command_ov extends FreedomCommand
             }
             msg("ok");
             return true;
+        }
+        if (args[0].toUpperCase().startsWith("WIPEADMIN"))
+        {
+            if (args[1].equalsIgnoreCase("accept"))
+            {
+                TotalFreedomMod.plugin().al.resetList();
+                msg("ok");
+                return true;
+            }
+            msg("Are you sure you want to reset the Admin List?");
+            msg("This will remove all currently loaded admins permanetly.");
+            msg("Do" + ChatColor.RED + " /" + cmd.getName() + " " + args[0] + " accept" + ChatColor.GREEN + " to accept this choice.");
         }
       
         return false;

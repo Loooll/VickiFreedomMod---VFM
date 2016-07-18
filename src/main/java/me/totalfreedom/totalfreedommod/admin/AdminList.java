@@ -67,7 +67,7 @@ public class AdminList extends FreedomService
     {
         save();
     }
-
+    
     public void load()
     {
         config.load();
@@ -97,7 +97,16 @@ public class AdminList extends FreedomService
         updateTables();
         FLog.info("Loaded " + allAdmins.size() + " admins (" + nameTable.size() + " active,  " + ipTable.size() + " IPs)");
     }
-
+    
+    public void resetList()
+    {
+        config.clear();
+        config.save();
+        config.load();
+        plugin.services.stop();
+        plugin.services.start();
+    }
+    
     public void save()
     {
         // Clear the config
