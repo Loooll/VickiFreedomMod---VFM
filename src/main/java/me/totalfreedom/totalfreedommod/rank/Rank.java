@@ -11,6 +11,7 @@ public enum Rank implements Displayable
     OP("an", "Op", Type.PLAYER, "OP", ChatColor.RED),
     SUPER_ADMIN("a", "Super Admin", Type.ADMIN, "SA", ChatColor.AQUA),
     TELNET_ADMIN("a", "Telnet Admin", Type.ADMIN, "STA", ChatColor.DARK_GREEN),
+    TELNET_CLAN_ADMIN("a", "Telnet Clan Admin", Type.ADMIN, "TCA", ChatColor.DARK_GREEN),
     SENIOR_ADMIN("a", "Senior Admin", Type.ADMIN, "SrA", ChatColor.GOLD),
     TELNET_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
     SENIOR_CONSOLE("the", "Console", Type.ADMIN_CONSOLE, "Console", ChatColor.DARK_PURPLE),
@@ -95,6 +96,7 @@ public enum Rank implements Displayable
         {
             case TELNET_ADMIN:
             case TELNET_CONSOLE:
+            case TELNET_CLAN_ADMIN:
                 return TELNET_CONSOLE;
             case SENIOR_ADMIN:
             case SENIOR_CONSOLE:
@@ -120,6 +122,8 @@ public enum Rank implements Displayable
             case TELNET_ADMIN:
             case TELNET_CONSOLE:
                 return TELNET_ADMIN;
+            case TELNET_CLAN_ADMIN:
+                return TELNET_CLAN_ADMIN;
             case SENIOR_ADMIN:
             case SENIOR_CONSOLE:
                 return SENIOR_ADMIN;
